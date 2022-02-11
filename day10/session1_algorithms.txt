@@ -1,0 +1,71 @@
+1. Bubble sort Algorithm
+
+	beginBubblesort(arr)
+	
+		for all array elements
+			if arr[i] > arr[i+1]
+				swap(arr[i],arr[i+1])
+			end if
+		end for
+		return arr
+	end of bubbleSort
+	
+	
+2. Merge Sort ALgorithm
+
+	mergeSort(arr,l,h)
+		if l<h
+			1. Find mid of array to divide the array in two halves
+			mid = (l+h)/2
+			2. Call mergeSort for first half array
+			mergeSort(arr,l,mid)
+			3.call mergeSort for second half array
+			mergeSort(arr,mid+1,h)
+			4. merge two half array in step 2 and 3
+			merge(arr,l,mid,h)
+		end if
+	end of mergeSort
+	
+	
+3. Quick Sort Algorithm
+
+	quickSort(arr,l,h)
+		if(l<h)
+			j= partition(l,h)
+			quickSort(arr,l,j)
+			quickSort(arr,j+1,h)
+		end if
+	end of quickSort
+	
+	
+	partition(l,h)
+		pivot = arr[l]
+		i=l,j=h
+		while(i<j)
+			do{
+				i++
+				}while(arr[i]<pivot)
+			do{
+				j++
+				}while(arr[j]>pivot)
+			if(i<j)
+				swap(arr[i],arr[j])
+			end if
+		swap(arr[l],arr[j])
+		return j
+	end of partition
+			
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
