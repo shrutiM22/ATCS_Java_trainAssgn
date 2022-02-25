@@ -1,0 +1,132 @@
+postgres=# create table manager(id int, name varchar(20),salary int);
+CREATE TABLE
+postgres=# select * from manager;
+ id | name | salary
+----+------+--------
+(0 rows)
+
+
+postgres=# insert into manager values (201,'Ariana',3003003);
+INSERT 0 1
+postgres=# insert into manager values (202,'Doja Cat',658700);
+INSERT 0 1
+postgres=# insert into manager values (203,'Camila',8647380);
+INSERT 0 1
+postgres=# insert into manager values (204,'CardiB',347380);
+INSERT 0 1
+postgres=# insert into manager values (205,'Rihanna',340000);
+INSERT 0 1
+postgres=# insert into manager values (206,'Taylor',940000);
+INSERT 0 1
+postgres=# select * from manager;
+ id  |   name   | salary
+-----+----------+---------
+ 201 | Ariana   | 3003003
+ 202 | Doja Cat |  658700
+ 203 | Camila   | 8647380
+ 204 | CardiB   |  347380
+ 205 | Rihanna  |  340000
+ 206 | Taylor   |  940000
+(6 rows)
+
+
+postgres=# create table employee(id int,designation varchar(30),email varchar(40));
+CREATE TABLE
+postgres=# select * from employee;
+ id | designation | email
+----+-------------+-------
+(0 rows)
+
+
+postgres=# insert into manager values (206,'Taylor','tay.ca@geo.com');
+ERROR:  invalid input syntax for integer: "tay.ca@geo.com"
+LINE 1: insert into manager values (206,'Taylor','tay.ca@geo.com');
+                                                 ^
+postgres=# insert into manager values (206,'assistant manager','tay.ca@geo.com');
+ERROR:  invalid input syntax for integer: "tay.ca@geo.com"
+LINE 1: ...sert into manager values (206,'assistant manager','tay.ca@ge...
+                                                             ^
+postgres=# insert into manager values (206,'assistant manager','tay.ca@geo.com');
+ERROR:  invalid input syntax for integer: "tay.ca@geo.com"
+LINE 1: ...sert into manager values (206,'assistant manager','tay.ca@ge...
+                                                             ^
+postgres=# insert into manager values (206,'assistant manager', 'tay.ca@geo.com');
+ERROR:  invalid input syntax for integer: "tay.ca@geo.com"
+LINE 1: ...ert into manager values (206,'assistant manager', 'tay.ca@ge...
+                                                             ^
+postgres=# insert into manager values (206,'assistant manager', "tay.ca@geo.com");
+ERROR:  column "tay.ca@geo.com" does not exist
+LINE 1: ...ert into manager values (206,'assistant manager', "tay.ca@ge...
+                                                             ^
+postgres=# insert into employee values (206,'assistant manager', "tay.ca@geo.com");
+ERROR:  column "tay.ca@geo.com" does not exist
+LINE 1: ...rt into employee values (206,'assistant manager', "tay.ca@ge...
+                                                             ^
+postgres=# insert into employee values (206,'assistant manager', 'tay.ca@geo.com');
+INSERT 0 1
+postgres=# insert into employee values (201,'managing head', 'ari@gmail.com');
+INSERT 0 1
+postgres=# insert into employee values (203,'intern manager', 'camila@gmail.com');
+INSERT 0 1
+postgres=# insert into employee values (202,'advertisment manager', 'doja.cat@gmail.com');
+INSERT 0 1
+postgres=# select * from employee;
+ id  |     designation      |       email
+-----+----------------------+--------------------
+ 206 | assistant manager    | tay.ca@geo.com
+ 201 | managing head        | ari@gmail.com
+ 203 | intern manager       | camila@gmail.com
+ 202 | advertisment manager | doja.cat@gmail.com
+(4 rows)
+
+
+postgres=# insert into employee values (204,'artist manager', 'cardi.b@hayu.com');
+INSERT 0 1
+postgres=# insert into employee values (205,'development manager', 'rihanna@hayu.com');
+INSERT 0 1
+postgres=# select * from employee;
+ id  |     designation      |       email
+-----+----------------------+--------------------
+ 206 | assistant manager    | tay.ca@geo.com
+ 201 | managing head        | ari@gmail.com
+ 203 | intern manager       | camila@gmail.com
+ 202 | advertisment manager | doja.cat@gmail.com
+ 204 | artist manager       | cardi.b@hayu.com
+ 205 | development manager  | rihanna@hayu.com
+(6 rows)
+
+
+postgres=# select m.id, m.name, m.salary from manager m, employee e where m.id = e.id;
+ id  |   name   | salary
+-----+----------+---------
+ 201 | Ariana   | 3003003
+ 202 | Doja Cat |  658700
+ 203 | Camila   | 8647380
+ 204 | CardiB   |  347380
+ 205 | Rihanna  |  340000
+ 206 | Taylor   |  940000
+(6 rows)
+
+
+postgres=# delete from employee where id=204;
+DELETE 1
+postgres=# select * from employee;
+ id  |     designation      |       email
+-----+----------------------+--------------------
+ 206 | assistant manager    | tay.ca@geo.com
+ 201 | managing head        | ari@gmail.com
+ 203 | intern manager       | camila@gmail.com
+ 202 | advertisment manager | doja.cat@gmail.com
+ 205 | development manager  | rihanna@hayu.com
+(5 rows)
+
+
+postgres=# select m.id, m.name, m.salary from manager m, employee e where m.id = e.id;
+ id  |   name   | salary
+-----+----------+---------
+ 201 | Ariana   | 3003003
+ 202 | Doja Cat |  658700
+ 203 | Camila   | 8647380
+ 205 | Rihanna  |  340000
+ 206 | Taylor   |  940000
+(5 rows)
